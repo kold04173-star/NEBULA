@@ -1,7 +1,7 @@
 <p align="center">  
   <a href="https://www.youtube.com/@coderxsa">
     <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/bot_image.jpg">
-    <h1 align="center">ηєвυℓα | 1.0.1</h1>
+    <h1 align="center">ηєвυℓα | 1.0.3</h1>
   </a>
 </p>
 <p align="center">
