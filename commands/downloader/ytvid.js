@@ -4,8 +4,8 @@ const axios = require("axios");
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 module.exports = {
-    name: "iosplay",
-    aliases: ["iosp"],
+    name: "ytvid",
+    aliases: ["ytvid"],
     category: "downloader",
     permissions: {
         coin: 10
@@ -13,30 +13,29 @@ module.exports = {
     code: async (ctx) => {
         const input = ctx.args.join(" ") || null;
         if (!input) {
-            return await ctx.reply(quote("⚠️ Please provide a song name."));
+            return await ctx.reply(quote("⚠️ Please provide a video name."));
         }
 
         try {
-            // Use your API here
             const apiUrl = `https://coderxsa-api.onrender.com/v1/downloaders/coderx/download/ytmp3v2?query=${encodeURIComponent(input)}`;
             const response = (await axios.get(apiUrl)).data;
 
-            if (response.success && response.result && response.result.download && response.result.download.audio) {
-                const audioUrl = response.result.download.audio;
+            if (response.success && response.result && response.result.download && response.result.download.video) {
+                const videoUrl = response.result.download.video;
 
-                const audioResponse = await axios.get(audioUrl, { responseType: 'arraybuffer' });
-                const audioBuffer = Buffer.from(audioResponse.data);
+                const videoResponse = await axios.get(videoUrl, { responseType: 'arraybuffer' });
+                const videoBuffer = Buffer.from(videoResponse.data);
 
-                // Wait 3 seconds before sending the audio
+                // Wait 3 seconds before sending video
                 await delay(3000);
 
                 await ctx.reply({
-                    audio: audioBuffer,
-                    mimetype: 'audio/mp4'
+                    video: videoBuffer,
+                    mimetype: 'video/mp4'
                 });
 
             } else {
-                return await ctx.reply(quote("⚠️ Could not fetch audio from API."));
+                return await ctx.reply(quote("⚠️ Could not fetch video from API."));
             }
         } catch (error) {
             return await ctx.reply(quote(`⚠️ Error occurred: Resend.`));
