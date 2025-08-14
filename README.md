@@ -14,7 +14,7 @@
 </p>
 
 ####  
-ηєвυℓα - Simple Multi Device whatsapp bot.|| After login time in whatsapp bot dev i have stopped and this is my last bot i wont maintain as much
+ηєвυℓα - Simple Multi Device whatsapp bot.|| After long time in whatsapp bot dev i have stopped and this is my last bot i wont maintain as much
 
 #### SETUP
 
