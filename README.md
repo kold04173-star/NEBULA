@@ -29,7 +29,7 @@
 2. **Earn Coins** – Collect at least **500 coins** and withdraw them.
 
 #### 🧰 Step 2: Join the Discord Server  
-- Join our Discord: https://discord.com/8snQrJrBx6  
+- Join our Discord: https://discord.gg/8snQrJrBx6  
 - Post your **coin hash** in the **#auth** channel.  
 - Start hosting directly using the Discord integration.  
 - **Note:** Access resets every Sunday — you’ll need to earn a fresh 500 coins each week.
