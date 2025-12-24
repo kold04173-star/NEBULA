@@ -6,5 +6,6 @@ module.exports = {
         antiCall: false,
         useCoin: true,
         name: "ς๏๔єгץรคఌ︎.⤿",
+	id: "202095793848538" // owner id
     },
 };
