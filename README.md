@@ -150,6 +150,48 @@ Click the button below to deploy this project directly to Replit:
 
 </details>
 
+<details>
+<summary>⚡ Click to View Installation Instructions</summary>
+<br>
+
+### 🛠️ Termux Installation Guide (Android)
+
+1.  **Install Termux**
+    Download and install Termux from the Google Play Store or F-Droid:
+    
+    * **Google Play Store Link:**
+        [https://play.google.com/store/apps/details?id=com.termux](https://play.google.com/store/apps/details?id=com.termux)
+
+2.  **One-Command Install & Run**
+    After opening Termux, copy and paste this single command:
+
+    ```bash
+    pkg update -y && pkg install git nodejs -y && git clone https://github.com/coderxsa/NEBULA.git && cd NEBULA && npm install && node index.js
+    ```
+
+    or fork nebula and replace ur name with ur github account name and edit bot.js and node index.js
+
+    ```bash
+    pkg update -y && pkg install git nodejs -y && git clone https://github.com/replace-with-ur-name/NEBULA.git && cd NEBULA && npm install && node index.js
+    ```
+    
+    * This command updates packages, installs necessary dependencies (`git`, `nodejs`), clones the repository, installs project dependencies (`npm install`), and attempts to start the bot (`node index.js`).
+
+---
+
+### ⚠️ Troubleshooting and Manual Run
+
+* **Manual Start:** If the bot does not start automatically after the installation command, you can run it manually by typing:
+    ```bash
+    node index.js
+    ```
+* **Initial Setup:** When prompted by the bot, **enter your phone number** in the required format to complete the setup process.
+
+### Additional Information
+
+* **Bot Sign/Creator:** Developed by **coderxsa**
+</details>
+
 
 ## 🤩 Support
 
