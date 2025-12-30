@@ -31,6 +31,7 @@
     "mime-types": "2.1.35",
     "moment-timezone": "^0.6.0",
     "n3bu1a": "git+https://github.com/coderxsa/fucku.git",
-    "simpl.db": "^2.13.0"
+    "simpl.db": "^2.13.0",
+    "fs-extra": "^11.1.1"
   }
 }
