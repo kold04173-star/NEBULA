@@ -1,6 +1,6 @@
 <p align="center">  
   <a href="https://www.youtube.com/@coderxsa">
-    <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/bot_image.jpg">
+    <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/main1.png">
   </a>
 </p>
 
