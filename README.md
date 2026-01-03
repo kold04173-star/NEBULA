@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">ηєвυℓα | Version 1.0.3</h1>
+<h1 align="center">ηєвυℓα | Version 3.0</h1>
 
 <p align="center">
   <strong>A Simple Multi-Device WhatsApp Bot</strong>
