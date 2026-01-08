@@ -1,10 +1,10 @@
 <p align="center">  
   <a href="https://www.youtube.com/@coderxsa">
-    <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/bot_image.jpg">
+    <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/main1.png">
   </a>
 </p>
 
-<h1 align="center">ηєвυℓα | Version 1.0.3</h1>
+<h1 align="center">ηєвυℓα | Version 3.0</h1>
 
 <p align="center">
   <strong>A Simple Multi-Device WhatsApp Bot</strong>
@@ -140,25 +140,6 @@ Choose your preferred method to deploy **ηєвυℓα**.
 > [!WARNING]
 > Always delete the `state` file and unlink your device after finishing a session.
 </details>
-
-<details>
-  <summary><strong>🐱 koyeb.com</strong></summary>
-
-### Run on koyeb
-
-> [!WARNING]
-> Always delete the `state` file and unlink your device after finishing a session.
-</details>
-
-<details>
-  <summary><strong>🐱 railway.com</strong></summary>
-
-### Run on railway.com
-
-> [!WARNING]
-> Always delete the `state` file and unlink your device after finishing a session.
-</details>
-
 
 ---
 
