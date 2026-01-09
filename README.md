@@ -1,189 +1,209 @@
-<h1 align="center">Device Activity Tracker</h1>
-<p align="center">WhatsApp & Signal Activity Tracker via RTT Analysis</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node.js-20+-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js"/>
-  <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript"/>
-  <img src="https://img.shields.io/badge/React-18+-61DAFB?style=flat&logo=react&logoColor=black" alt="React"/>
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"/>
+<p align="center">  
+  <a href="https://www.youtube.com/@coderxsa">
+    <img alt="ηєвυℓα" height="300" src="https://raw.githubusercontent.com/coderxsa/BOT-ASSETS/refs/heads/main/NEBULA-BOT/pic/main1.png">
+  </a>
 </p>
 
-> ⚠️ **DISCLAIMER**: Proof-of-concept for educational and security research purposes only. Demonstrates privacy vulnerabilities in WhatsApp and Signal.
+<h1 align="center">ηєвυℓα | Version 3.0</h1>
 
-## Overview
+<p align="center">
+  <strong>A Simple Multi-Device WhatsApp Bot</strong>
+</p>
 
-This project implements the research from the paper **"Careless Whisper: Exploiting Silent Delivery Receipts to Monitor Users on Mobile Instant Messengers"** by Gabriel K. Gegenhuber, Maximilian Günther, Markus Maier, Aljosha Judmayer, Florian Holzbauer, Philipp É. Frenzel, and Johanna Ullrich (University of Vienna & SBA Research).
+<p align="center">
+  <a href="https://github.com/coderxsa?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/coderxsa?label=Followers&style=for-the-badge&color=blue"></a>
+  <a href="https://github.com/coderxsa/nebula/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/coderxsa/nebula?label=Stars&style=for-the-badge&color=yellow"></a>
+  <a href="https://github.com/coderxsa/nebula/network/members"><img title="Forks" src="https://img.shields.io/github/forks/coderxsa/nebula?label=Forks&style=for-the-badge&color=orange"></a>
+  <a href="https://github.com/coderxsa/nebula/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/coderxsa/nebula?label=Watching&style=for-the-badge&color=green"></a>
+</p>
 
-**What it does:** By measuring Round-Trip Time (RTT) of WhatsApp message delivery receipts, this tool can detect:
-- When a user is actively using their device (low RTT)
-- When the device is in standby/idle mode (higher RTT)
-- Potential location changes (mobile data vs. WiFi)
-- Activity patterns over time
-
-**Security implications:** This demonstrates a significant privacy vulnerability in messaging apps that can be exploited for surveillance.
-
-## Example
-
-![WhatsApp Activity Tracker Interface](example.png)
-
-The web interface shows real-time RTT measurements, device state detection, and activity patterns.
-
-## Installation
-
-```bash
-# Clone repository
-git clone https://github.com/gommzystudio/device-activity-tracker.git
-cd device-activity-tracker
-
-# Install dependencies
-npm install
-cd client && npm install && cd ..
-```
-
-**Requirements:** Node.js 20+, npm, WhatsApp account
-
-## Usage
-
-### Docker (Recommended)
-
-The easiest way to run the application is using Docker:
-
-```bash
-# Copy environment template
-cp .env.example .env
-
-# (Optional) Customize ports in .env file
-# BACKEND_PORT=3001
-# CLIENT_PORT=3000
-
-# Build and start containers
-docker compose up --build
-```
-
-The application will be available at:
-- Frontend: [http://localhost:3000](http://localhost:3000) (or your configured `CLIENT_PORT`)
-- Backend: [http://localhost:3001](http://localhost:3001) (or your configured `BACKEND_PORT`)
-
-To stop the containers:
-```bash
-docker compose down
-```
-
-### Manual Setup
-
-#### Web Interface
-
-```bash
-# Terminal 1: Start backend
-npm run start:server
-
-# Terminal 2: Start frontend
-npm run start:client
-```
-
-Open `http://localhost:3000`, scan QR code with WhatsApp, then enter phone number to track (e.g., `491701234567`).
-
-### CLI Interface (only WhatsApp)
-
-```bash
-npm start
-```
-
-Follow prompts to authenticate and enter target number.
-
-**Example Output:**
-
-```
-╔════════════════════════════════════════════════════════════════╗
-║ 🟡 Device Status Update - 09:41:51                             ║
-╠════════════════════════════════════════════════════════════════╣
-║ JID:        ***********@lid                                    ║
-║ Status:     Standby                                            ║
-║ RTT:        1104ms                                             ║
-║ Avg (3):    1161ms                                             ║
-║ Median:     1195ms                                             ║
-║ Threshold:  1075ms                                             ║
-╚════════════════════════════════════════════════════════════════╝
-```
-
-- **🟢 Online**: Device is actively being used (RTT below threshold)
-- **🟡 Standby**: Device is idle/locked (RTT above threshold)
-- **🔴 Offline**: Device is offline or unreachable (no CLIENT ACK received)
-
-## How It Works
-
-The tracker sends probe messages and measures the Round-Trip Time (RTT) to detect device activity. Two probe methods are available:
-
-### Probe Methods
-
-| Method | Description                                                                                                     |
-|--------|-----------------------------------------------------------------------------------------------------------------|
-| **Delete** (Default) | Sends a "delete" request for a non-existent message ID.                                                         |
-| **Reaction** | Sends a reaction emoji to a non-existent message ID. |
-
-### Detection Logic
-
-The time between sending the probe message and receiving the CLIENT ACK (Status 3) is measured as RTT. Device state is detected using a dynamic threshold calculated as 90% of the median RTT: values below the threshold indicate active usage, values above indicate standby mode. Measurements are stored in a history and the median is continuously updated to adapt to different network conditions.
-
-### Switching Probe Methods
-
-In the web interface, you can switch between probe methods using the dropdown in the control panel. In CLI mode, the delete method is used by default.
-
-## Common Issues
-
-- **Not Connecting to WhatsApp**: Delete the `auth_info_baileys/` folder and re-scan the QR code.
-
-## Project Structure
-
-```
-device-activity-tracker/
-├── src/
-│   ├── tracker.ts         # WhatsApp RTT analysis logic
-│   ├── signal-tracker.ts  # Signal RTT analysis logic
-│   ├── server.ts          # Backend API server (both platforms)
-│   └── index.ts           # CLI interface
-├── client/                # React web interface
-└── package.json
-```
-
-## How to Protect Yourself
-
-The most effective mitigation is to enable “Block unknown account messages” in WhatsApp under
-Settings → Privacy → Advanced.
-
-This setting may reduce an attacker’s ability to spam probe reactions from unknown numbers, because WhatsApp blocks high-volume messages from unknown accounts.
-However, WhatsApp does not disclose what “high volume” means, so this does not fully prevent an attacker from sending a significant number of probe reactions before rate-limiting kicks in.
-
-Disabling read receipts helps with regular messages but does not protect against this specific attack. As of December 2025, this vulnerability remains exploitable in WhatsApp and Signal.
-
-## Ethical & Legal Considerations
-
-⚠️ For research and educational purposes only. Never track people without explicit consent - this may violate privacy laws. Authentication data (`auth_info_baileys/`) is stored locally and must never be committed to version control.
-
-## Citation
-
-Based on research by Gegenhuber et al., University of Vienna & SBA Research:
-
-```bibtex
-@inproceedings{gegenhuber2024careless,
-  title={Careless Whisper: Exploiting Silent Delivery Receipts to Monitor Users on Mobile Instant Messengers},
-  author={Gegenhuber, Gabriel K. and G{\"u}nther, Maximilian and Maier, Markus and Judmayer, Aljosha and Holzbauer, Florian and Frenzel, Philipp {\'E}. and Ullrich, Johanna},
-  year={2024},
-  organization={University of Vienna, SBA Research}
-}
-```
-
-## License
-
-MIT License - See LICENSE file.
-
-Built with [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys)
+<p align="center">
+  <a href='https://github.com/coderxsa/nebula/fork' target="_blank"><img alt='Fork repo' src='https://img.shields.io/badge/Fork Repo-black?style=for-the-badge&logo=github&logoColor=white'/></a>
+</p>
 
 ---
 
-**Use responsibly. This tool demonstrates real security vulnerabilities that affect millions of users.**
+## 🚀 Installation & Setup
+
+Choose your preferred method to deploy **ηєвυℓα**.
+
+<details>
+  <summary><strong>💻 PC Installation (Recommended)</strong></summary>
+
+### Local Installation Guide
+
+1.  **Prerequisites:**
+    * Download and install [Node.js](https://nodejs.org/).
+    * Download and install [Git](https://git-scm.com/).
+
+2.  **Download the Source:**
+    * Download the repository zip file and extract it, OR run:
+        ```bash
+        git clone https://github.com/coderxsa/nebula.git
+        ```
+
+3.  **Install Dependencies:**
+    * Open your Command Prompt (cmd) or Terminal.
+    * Navigate to the bot folder:
+        ```bash
+        cd nebula
+        ```
+    * Install the required packages:
+        ```bash
+        npm install
+        ```
+
+4.  **Configuration:**
+    * Open `bot.js` in a text editor (like VS Code or Notepad).
+    * Enter your phone number where indicated.
+
+5.  **Run the Bot:**
+    * Start the application:
+        ```bash
+        node index.js
+        ```
+
+> [!WARNING]
+> **Important:** To prevent connection errors, always delete the `state` file and unlink the device from WhatsApp before running the bot again.
+</details>
+
+<details>
+  <summary><strong>☁️ Replit Deployment</strong></summary>
+
+### Deploy via Replit
+*Note: Replit is moving to paid plans, but free options may still be available.*
+
+1.  **Create Account:** [Sign up for Replit](https://replit.com/signup).
+2.  **Deploy:** Click the button below to fork and deploy directly.
+
+<p align="center">
+  <a href="https://repl.it/github/coderxsa/nebula.git">
+    <img src="https://img.shields.io/badge/Deploy%20on%20Replit-blue?style=for-the-badge&logo=replit" width="200"/>
+  </a>
+</p>
+</details>
+
+<details>
+  <summary><strong>🤖 Bot-Hosting.net Guide</strong></summary>
+
+### Free Hosting via Bot-Hosting.net
+
+1.  Log in to [Bot Hosting](https://bot-hosting.net/) using Discord.
+2.  Navigate to **Earn Coins** and claim your daily free coins.
+3.  Go to **Create Server**:
+    * Enter a name.
+    * Select **Node.js**.
+    * Choose the **1 week** plan.
+4.  Download the bot files from this repo.
+5.  Upload the **NEBULA** folder to the panel and extract it.
+6.  Set the "Startup File" or "File Mode" to correct path (usually `index.js` or `bot.js` as per panel instructions).
+7.  Edit `bot.js`, input your phone number, and save.
+8.  Start the server.
+
+> [!TIP]
+> **Maintenance:** Delete the `state` file and unlink your device daily to ensure a clean start.
+</details>
+
+<details>
+  <summary><strong>⚡ Optiklink Hosting</strong></summary>
+
+### Free Hosting via Optiklink
+
+1.  Log in to [Optiklink](https://optiklink.com/home) using Discord.
+2.  Navigate to **Make Panel** -> **Create Server**.
+3.  Select **Node.js** as the platform.
+4.  Upload the **NEBULA** folder and extract the files.
+5.  Set file permissions/mode if required.
+6.  Edit `bot.js` with your details.
+7.  Start the bot.
+
+> [!TIP]
+> **Maintenance:** Delete the `state` file and unlink your device daily to ensure a clean start.
+</details>
+
+<details>
+  <summary><strong>🐱 GitHub Codespaces</strong></summary>
+
+### Run on GitHub Codespaces
+
+1.  Go to the [Nebula Repository](https://github.com/coderxsa/NEBULA).
+2.  Click the green **Code** button -> **Codespaces** -> **Create new codespace**.
+3.  Wait for the terminal to load.
+4.  Run the installation command:
+    ```bash
+    npm install && node index.js
+    ```
+5.  Open `bot.js`, enter your phone number, and save.
+6.  Restart the bot using `node index.js`.
+7.  Scan the pairing code provided in the terminal.
+
+> [!WARNING]
+> Always delete the `state` file and unlink your device after finishing a session.
+</details>
+
+<details>
+  <summary><strong>🤖 NEBULA - Installation Guide</strong></summary>
+
+### 📱 Termux Setup for NEBULA WhatsApp Bot
+
+1. Open **Termux** on your Android device.  
+2. Run this **one-line command** to update packages, enable storage access, install required dependencies (Node.js, git), clone the NEBULA repo, install node modules, and start the bot:
+
+```bash
+pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y nodejs git && git clone https://github.com/coderxsa/NEBULA.git && cd NEBULA && npm install && nano bot.js
+```
+### Use this line if u fork the bot and edited bot.js on github abd put ur phonenumebr in
+
+```bash
+pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y nodejs git && git clone https://github.com/urname/NEBULA.git && cd NEBULA && npm install && node index.js
+```
+
+### 🧹 To Remove state and Unlink Device
+
+1) If you want to unlink your WhatsApp session or reset login, run this command:
+
+```bash
+cd NEBULA && rm -rf state
+```
+
+```bash
+node index.js
+```
+
+> [!WARNING]
+> Always delete the `state` file and unlink your device after finishing a session.
+
+</details>
 
 
-## Star History
+---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=gommzystudio/device-activity-tracker&type=date&legend=top-left)](https://www.star-history.com/#gommzystudio/device-activity-tracker&type=date&legend=top-left)
+## 🤝 Support & Credits
+
+**Support the Project:**
+<br>
+<a href="https://pay.yoco.com/coderxsa"><img alt="Yoco Donation" src="https://a.storyblok.com/f/111633/600x120/efd2e37265/payment-strip.svg" width="300"/></a>
+
+* If you like ηєвυℓα, please give it a Star ⭐!
+
+**Main Developer:**
+<br>
+<a href="https://github.com/coderxsa">
+  <img src="https://avatars.githubusercontent.com/u/149763717?v=4" width="100" height="100" alt="coderxsa" style="border-radius: 50%;"/>
+</a>
+<br>
+**coderxsa**
+
+---
+
+## ⚠️ Disclaimer & Notice
+
+**Terms of Use:**
+1.  **Not For Sale:** This bot is free.
+2.  **Obfuscated Code:** If a plugin's code is encrypted/obfuscated, you do not have permission to edit it.
+3.  **Credits:** Do not remove credits if you re-upload or use these files.
+
+**WhatsApp Policy Warning:**
+> This bot is not affiliated with `WhatsApp Inc.` Misusing the bot (spamming, bulk messaging) may result in your WhatsApp account being **banned**.
+> * I am not responsible for any bans your account may receive.
+> * Use this bot at your own risk.
