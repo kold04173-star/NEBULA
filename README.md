@@ -142,20 +142,13 @@ Choose your preferred method to deploy **ηєвυℓα**.
 </details>
 
 <details>
-  <summary><strong>🤖 NEBULA - Installation Guide</strong></summary>
+  <summary><strong>🤖 NEBULA - Termux Setup Guide</strong></summary>
 
-### 📱 Termux Setup for NEBULA WhatsApp Bot
-
-1. Open **Termux** on your Android device.  
-2. Run this **one-line command** to update packages, enable storage access, install required dependencies (Node.js, git), clone the NEBULA repo, install node modules, and start the bot:
+1. Open **Termux** on your Android device [TERMUX](https://play.google.com/store/apps/details?id=com.termux) .  
+2. Run this **one-line command** to update packages.
 
 ```bash
-pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y nodejs git && git clone https://github.com/coderxsa/NEBULA.git && cd NEBULA && npm install && nano bot.js
-```
-### Use this line if u fork the bot and edited bot.js on github abd put ur phonenumebr in
-
-```bash
-pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y nodejs git && git clone https://github.com/urname/NEBULA.git && cd NEBULA && npm install && node index.js
+pkg update -y && pkg upgrade -y && pkg install -y nodejs git && git clone https://github.com/coderxsa/NEBULA.git && cd NEBULA && npm install && nano bot.js
 ```
 
 ### 🧹 To Remove state and Unlink Device
