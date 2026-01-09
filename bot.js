@@ -1,12 +1,12 @@
 // bot.js
 module.exports = {
     bot: {
-        phoneNumber: "27xxxxx", // add ur bot numeber
+        phoneNumber: "27691662341", // 27691662341
         usePairingCode: true,
         antiCall: false,
         useCoin: true,
         autoRead: true,
-        name: "ς๏๔єгץรคఌ︎.⤿",
-	id: "202095793848538" // owner id
+        name: "Papacita Kold",
+	id: "106077605646392" // 106077605646392
     },
 };
